@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ fsp["site_title"] }}</title>
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" /> -->
+
+</head>
+<body>
+    <header>
+        <h1>Tejas Bhagawatula's blog</h1>
+        <nav>
+            <a href="/">Index</a> / 
+            <a href="http://tejas.bhagawatula.com">About</a>
+            <!-- <a href="/about">About</a> -->
+        </nav>
+    </header>
+    <main>
+        {% if "title" in md_metadata %}
+        <h1>{{ md_metadata["title"][0] }}</h1>
+        {% endif %}
+        {% if "date" in md_metadata %}
+        <p><i>Written on {{ md_metadata["date"][0] }}</i></p>
+        {% endif %}
+        <hr />
+        {{ body }}
+    </main>
+</body>
+<footer>
+    <hr />
+    <small>Copyright &copy; 2026 Tejas Bhagawatula. All rights reserved.</small>
+</footer>
+</html>
