@@ -1,36 +1,313 @@
+{% if ("special" in md_metadata and md_metadata["special"][0] == "blog") or ("special" not in md_metadata) %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ fsp["site_title"] }}</title>
-    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-    <!-- <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" media="screen" /> -->
+    <title>Tejas Bhagawatula's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CSS Variables for Accessibility & Light/Dark Theme Switch (from v6.html) */
+        :root {
+            --bg-site: linear-gradient(#1b112b, #0b1c1c);
+            --card-site: #162032;
+            --border-site: #3b4d6b;
+            --heading-site: #ffffff;
+            --body-site: #f8fafc;
+            --subtext-site: #cbd5e1;
+            --amber-site: #fbbf24;
+            --cyan-site: #38bdf8;
+            --phosphor-site: #4ade80;
+            --badge-site: #0f172a;
+            --header-bg: rgba(2, 6, 23, 0.95);
+        }
 
+        html.light {
+            --bg-site: #f8fafc;
+            --card-site: #ffffff;
+            --border-site: #cbd5e1;
+            --heading-site: #0f172a;
+            --body-site: #1e293b;
+            --subtext-site: #475569;
+            --amber-site: #d97706;
+            --cyan-site: #0284c7;
+            --phosphor-site: #15803d;
+            --badge-site: #e2e8f0;
+            --header-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            background: var(--bg-site);
+            color: var(--body-site);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .theme-card { background-color: var(--card-site); border-color: var(--border-site); }
+        .theme-border { border-color: var(--border-site); }
+        .theme-heading { color: var(--heading-site); }
+        .theme-subtext { color: var(--subtext-site); }
+        .theme-amber { color: var(--amber-site); }
+        .theme-cyan { color: var(--cyan-site); }
+        .theme-phosphor { color: var(--phosphor-site); }
+        .theme-badge { background-color: var(--badge-site); border-color: var(--border-site); }
+        .theme-header { background-color: var(--header-bg); border-color: var(--border-site); }
+
+        /* ==========================================================================
+           Semantic HTML Styling Engine for Generated Markdown Content
+           ========================================================================== */
+        .blog-content {
+            font-size: 1.125rem; /* 18px base text */
+            line-height: 1.8;
+            color: var(--body-site);
+        }
+
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content h1, 
+        .blog-content h2, 
+        .blog-content h3, 
+        .blog-content h4 {
+            color: var(--heading-site);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 6rem;
+        }
+
+        .blog-content h1 { font-size: 2.25rem; border-bottom: 2px solid var(--border-site); padding-bottom: 0.5rem; }
+        .blog-content h2 { font-size: 1.75rem; }
+        .blog-content h3 { font-size: 1.35rem; }
+        .blog-content h4 { font-size: 1.15rem; }
+
+        .blog-content a {
+            color: var(--cyan-site);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .blog-content a:hover {
+            color: var(--amber-site);
+        }
+
+        .blog-content strong {
+            color: var(--heading-site);
+            font-weight: 700;
+        }
+
+        .blog-content em {
+            font-style: italic;
+        }
+
+        .blog-content ul {
+            list-style-type: disc;
+            padding-left: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content ol {
+            list-style-type: decimal;
+            padding-left: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content blockquote {
+            border-left: 4px solid var(--amber-site);
+            background-color: var(--card-site);
+            padding: 1rem 1.25rem;
+            margin: 1.75rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            color: var(--subtext-site);
+            font-style: italic;
+        }
+
+        .blog-content code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            background-color: var(--badge-site);
+            border: 1px solid var(--border-site);
+            color: var(--amber-site);
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+
+        .blog-content pre {
+            background-color: var(--badge-site);
+            border: 2px solid var(--border-site);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 1.75rem 0;
+        }
+
+        .blog-content pre code {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            color: var(--body-site);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .blog-content hr {
+            border: 0;
+            border-top: 2px solid var(--border-site);
+            margin: 3rem 0;
+        }
+
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            border: 2px solid var(--border-site);
+            margin: 2rem 0;
+        }
+
+        .blog-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .blog-content th, 
+        .blog-content td {
+            border: 1px solid var(--border-site);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .blog-content th {
+            background-color: var(--badge-site);
+            color: var(--heading-site);
+            font-weight: 700;
+        }
+
+        .blog-content tr:nth-child(even) {
+            background-color: var(--card-site);
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>Tejas Bhagawatula's blog</h1>
-        <nav>
-            <a href="/">Index</a> / 
-            <a href="http://tejas.bhagawatula.com">About</a>
-            <!-- <a href="/about">About</a> -->
-        </nav>
+<body class="font-sans text-base leading-relaxed antialiased selection:bg-amber-400 selection:text-slate-950">
+
+    <header class="theme-header border-b-2 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4">
+            <a href="/" class="font-mono text-lg font-bold theme-heading tracking-tight hover:theme-cyan focus:outline-none focus:ring-2 focus:ring-amber-500 rounded px-1 flex items-center gap-2">
+                Tejas Bhagawatula
+            </a>
+            
+            <div class="flex items-center gap-4">
+                <nav class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm font-semibold theme-subtext">
+                    <a href="/#about" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#about</a>
+                    <a href="/#blog" class="theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">/blog</a>
+                    <a href="/#research" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#research</a>
+                    <a href="/#builds" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#software</a>
+                    <a href="/#hardware" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#hardware</a>
+                    <a href="/#activities" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#more</a>
+                    <a href="/#contact" class="hover:theme-amber focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1 transition-colors">#contact</a>
+                </nav>
+
+                <button id="theme-toggle" aria-label="Toggle Light and Dark Theme" class="p-2 rounded-lg theme-badge theme-heading hover:theme-cyan border-2 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors">
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+            </div>
+        </div>
     </header>
-    <main>
-        {% if "title" in md_metadata %}
-        <h1>{{ md_metadata["title"][0] }}</h1>
-        {% endif %}
-        {% if "date" in md_metadata %}
-        <p><i>Written on {{ md_metadata["date"][0] }}</i></p>
-        {% endif %}
-        <hr />
-        {{ body }}
+
+    <main class="max-w-4xl mx-auto px-6 py-10">
+
+        <div class="mb-8 font-mono text-sm">
+            <a href="{{ link_to('blog') }}" class="theme-cyan font-bold hover:underline inline-flex items-center gap-1.5">
+                Back to /blog
+            </a>
+        </div>
+
+        <header class="border-b-2 theme-border pb-8 mb-10 space-y-4">
+
+            {% if "title" in md_metadata %}
+            <h1 class="text-3xl sm:text-5xl font-bold tracking-tight theme-heading leading-tight">
+                {{ md_metadata["title"][0] }}
+            </h1>
+            {% endif %}
+        
+            {% if "description" in md_metadata %}
+            <p class="theme-subtext text-lg sm:text-xl leading-relaxed">
+                {{ md_metadata["description"][0] }}
+            </p>
+            {% endif %}
+
+            {% if "date" in md_metadata %}
+            <p class="theme-subtext text-lg sm:text-xl leading-relaxed">
+                <i>Written on {{ md_metadata["date"][0] }}</i>
+            </p>
+            {% endif %}
+
+        </header>
+
+        <article class="blog-content">
+
+            {{ body }}
+
+        </article>
+
+        <footer class="border-t-2 theme-border mt-16 pt-10 pb-12 space-y-6 font-mono text-sm">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                <div class="space-y-2">
+                    <p class="theme-heading font-bold text-base">Enjoyed this post or have questions?</p>
+                    <p class="theme-amber font-bold text-base theme-badge border px-3 py-1.5 rounded inline-block">
+                        tejas.bhagawatula [at] gmail [dot] com
+                    </p>
+                </div>
+                <div class="flex items-center space-x-6 text-base font-bold">
+                    <a href="https://github.com/Tejas-Bh/" target="_blank" class="theme-cyan hover:underline focus:outline-none focus:ring-1 focus:ring-amber-500 rounded px-1">GitHub</a>
+                </div>
+            </div>
+            <div class="theme-subtext text-xs flex flex-wrap justify-between items-center border-t theme-border pt-6 gap-2">
+                <span class="font-bold theme-heading">&copy; Tejas Bhagawatula. 73 DE KJ5OAE!</span>
+                <a href="#blog" class="theme-cyan hover:underline">Back to Main Workbench</a>
+            </div>
+        </footer>
+
     </main>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            themeToggleLightIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('light')) {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+                localStorage.setItem('color-theme', 'light');
+            }
+        });
+    </script>
 </body>
-<footer>
-    <hr />
-    <small>Copyright &copy; 2026 Tejas Bhagawatula. All rights reserved.</small>
-</footer>
 </html>
+{% else %}
+{{ body }}
+{% endif %}
