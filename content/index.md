@@ -297,7 +297,7 @@ special: index
                         Hardware deployment and antenna tuning for <code class="theme-amber">wsjt-probe</code> data collection, packet telemetry reception, and tropospheric ducting monitoring over VHF/UHF frequencies.
                     </p>
                     <div class="text-xs font-mono theme-subtext pt-1">
-                        Tools: RTL-SDR, Dipoles, Magnetic Loops, Handheld Transceivers
+                        Tools: RTL-SDR, Dipoles, NEC, Handheld Transceivers
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@ special: index
                 <div class="theme-card border-2 p-6 rounded-xl space-y-2">
                     <h3 class="font-bold theme-heading text-lg">Music & Vocal Performance</h3>
                     <p class="text-xs sm:text-sm theme-subtext leading-relaxed">
-                        Musician playing <strong class="theme-heading">Violin, Viola, Guitar, and Voice</strong>. Ensemble rehearsals foster collaborative timing, rhythm, and active listening.
+                        Playing the <strong class="theme-heading">Violin, Viola, Guitar, and Voice</strong>. Music has been a great way to explore my creativity, improve my discipline, and make new friends.
                     </p>
                 </div>
 
